@@ -43,9 +43,11 @@ function manufacture(gifts, materials) {
         let manufacturedGiftLength = 0
 
         for (let index = 0; index < element.length; index++) {
+           
 
             if (everyMaterial.find(e => e === element[index])) {
                 manufacturedGiftLength += 1
+                everyMaterial = everyMaterial.filter(e => e != element[index])
 
                 if (manufacturedGiftLength === element.length) {
                     manufacturedGifts.push(element);
@@ -53,6 +55,8 @@ function manufacture(gifts, materials) {
             }
         }
     }
+
+    
     return manufacturedGifts
 }
 console.log(

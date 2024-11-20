@@ -37,14 +37,23 @@ const gifts3 = [5, 1, 5, 1]
 
 function findFirstRepeated(gifts) {
   let giftsNumbers = []
+  let giftsNumbersRepeated = []
 
   for (let i = 0; i < gifts.length; i++) {
     const repeatedNumber = giftsNumbers.find(e => e === gifts[i])
 
-    if (repeatedNumber) return repeatedNumber
+    if (repeatedNumber) giftsNumbersRepeated.push(repeatedNumber)
     giftsNumbers.push(gifts[i])
-
   }
-  return -1
+   
+ return giftsNumbersRepeated.length > 0 
+  ?  giftsNumbersRepeated 
+  : -1
+
 }
 
+console.log(
+  findFirstRepeated(gifts1),
+  findFirstRepeated(gifts3),
+  findFirstRepeated(gifts2),
+);
