@@ -32,32 +32,32 @@ const gifts = ['tren', 'oso', 'pelota']
 const materials = 'tronesa'
 
 function manufacture(gifts, materials) {
-    let useMaterials = []
-    let listaGifts = []
-    let finalGift = []
+    let everyMaterial = []
+    let manufacturedGifts = []
 
     for (let i = 0; i < materials.length; i++) {
-        useMaterials.push(materials[i]);
+        everyMaterial.push(materials[i]);
     }
     for (let i = 0; i < gifts.length; i++) {
         const element = gifts[i]
-        const largo = element.length
-        let cantidadCaracteres = 0
+        let manufacturedGiftLength = 0
 
-        for (let index = 0; index < largo; index++) {
-           
-            if (useMaterials.find(e => e === element[index])) {
-                cantidadCaracteres += 1
-                
-                if(cantidadCaracteres === largo){
-                    finalGift.push(element);
-                }     
-            }   
+        for (let index = 0; index < element.length; index++) {
+
+            if (everyMaterial.find(e => e === element[index])) {
+                manufacturedGiftLength += 1
+
+                if (manufacturedGiftLength === element.length) {
+                    manufacturedGifts.push(element);
+                }
+            }
         }
     }
-    return finalGift
+    return manufacturedGifts
 }
 console.log(
 
-    manufacture(gifts, materials)
+    manufacture(gifts, materials),
+    manufacture(['juego', 'puzzle'], 'jlepuz'),
+    manufacture(['libro', 'ps5'], 'psli'),
 );
