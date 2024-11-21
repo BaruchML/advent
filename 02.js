@@ -57,7 +57,9 @@ function manufacture(gifts, materials) {
     }
     return finalGift
 }
-console.log(
+const test = require('node:test');
 
-    manufacture(gifts, materials)
-);
+test('synchronous passing test', (t) => {
+  // This test passes because it does not throw an exception.
+  manufacture.strictEqual(1,1);
+});
