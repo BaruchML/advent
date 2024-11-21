@@ -35,18 +35,25 @@ const gifts2 = [1, 2, 3, 4]
 const gifts3 = [5, 1, 5, 1]
 
 
-function findFirstRepeated(arr) {
-let newArr = []
+function findFirstRepeated(gifts) {
+  let giftsNumbers = []
+  let giftsNumbersRepeated = []
 
-    for (let i = 0; i < arr.length; i++) {
-      const element = newArr.find(e => e === arr[i])
-      if (!element) {
-        newArr.push(arr[i])
-      }else {
-        return arr[i]
-      }
-      
-    }
-    return -1
+  for (let i = 0; i < gifts.length; i++) {
+    const repeatedNumber = giftsNumbers.find(e => e === gifts[i])
+
+    if (repeatedNumber) giftsNumbersRepeated.push(repeatedNumber)
+    giftsNumbers.push(gifts[i])
+  }
+   
+ return giftsNumbersRepeated.length > 0 
+  ?  giftsNumbersRepeated 
+  : -1
+
 }
 
+console.log(
+  findFirstRepeated(gifts1),
+  findFirstRepeated(gifts3),
+  findFirstRepeated(gifts2),
+);
