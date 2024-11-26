@@ -26,31 +26,140 @@ El nivel máximo de anidamiento es 2.
 */
 
 function decode(message) {
-   let letters = []
-    let parentheses = []
+    let letters = []
+    let parenthesesIndex = []
+    let firstReversedLetters = []
+    let secondReversedLetters = []
 
-    
     for (let i = 0; i < message.length; i++) {
         letters.push(message[i])
     }
 
-    let inicio = message.indexOf('(');
-    let final =  message.indexOf(')');
+    let openingParentheses = letters.indexOf('(');
+    let closureParentheses = letters.indexOf(')');
 
-  for (inicio = inicio + 1; inicio <= final - 1; inicio++) {
+    while (openingParentheses != -1) {
+        parenthesesIndex.push(openingParentheses)
+        openingParentheses = letters.indexOf('(', openingParentheses + 1)
+    }
+    while (closureParentheses != -1) {
+        parenthesesIndex.push(closureParentheses)
+        closureParentheses = letters.indexOf(')', closureParentheses + 1)
+    }
 
-   parentheses.push(message[inicio])
-   
-  }
-   parentheses.reverse()
-  
-   letters.splice( message.indexOf('('),parentheses.length + 2,parentheses[0],parentheses[1],parentheses[2],)
 
-console.log(letters.join(''));
+    //DOBLE
+    if (parenthesesIndex.length > 2 && parenthesesIndex[1] > parenthesesIndex[2]) {
+
+        for (let i = parenthesesIndex[0]; i <= parenthesesIndex[2]; i++) {
+            firstReversedLetters.push(letters[i])
+        }
+
+        firstReversedLetters.reverse()
+
+        let index = 0
+        let sum = parenthesesIndex[0]
+
+        
+        for (let i = parenthesesIndex[0]; i <= parenthesesIndex[2]; i++) {
+
+            letters.splice(sum, 1, firstReversedLetters[index])
+            index = index + 1
+            sum = sum + 1
+
+        }
+        for (let i = parenthesesIndex[1]; i <= parenthesesIndex[3]; i++) {
+            secondReversedLetters.push(letters[i])
+        }
+
+        secondReversedLetters.reverse()
+        index = 0
+        sum = parenthesesIndex[1]
+        
+        for (let i = parenthesesIndex[1]; i <= parenthesesIndex[3]; i++) {
+
+            letters.splice(sum, 1, secondReversedLetters[index])
+            index = index + 1
+            sum = sum + 1
+        }
+        return letters.filter(l => l != '(' && l != ')').join('')
+
+
+
+   //ANIDADO
+    }else if(parenthesesIndex.length > 2){
+       
+        for (let i = parenthesesIndex[0]; i <= parenthesesIndex[3]; i++) {
+            firstReversedLetters.push(letters[i])
+        }
+
+        firstReversedLetters.reverse()
+
+        let index = 0
+        let sum = parenthesesIndex[0]
+        
+        for (let i = parenthesesIndex[0]; i <= parenthesesIndex[3]; i++) {
+
+            letters.splice(sum, 1, firstReversedLetters[index])
+            index = index + 1
+            sum = sum + 1
+        }
+        
+        closureParentheses = letters.indexOf(')');
+        while (closureParentheses != -1) {
+            parenthesesIndex.push(closureParentheses)
+            closureParentheses = letters.indexOf(')', closureParentheses + 1)
+        }
+        openingParentheses = letters.indexOf('(')
+        while (openingParentheses != -1) {
+            parenthesesIndex.push(openingParentheses)
+            openingParentheses = letters.indexOf('(', openingParentheses + 1)
+        }
+        for (let i = parenthesesIndex[5]; i <= parenthesesIndex[6]; i++) {
+            secondReversedLetters.push(letters[i])
+        }
+
+        secondReversedLetters.reverse()
+        index = 0
+        sum = parenthesesIndex[5]
+        
+        for (let i = parenthesesIndex[5]; i <= parenthesesIndex[6]; i++) {
+
+            letters.splice(sum, 1, secondReversedLetters[index])
+            index = index + 1
+            sum = sum + 1
+        }
+        return letters.filter(l => l != '(' && l != ')').join('')
+        
+        
+   //SIMPLE
+    }else{
+        for (let i = parenthesesIndex[0]; i <= parenthesesIndex[1]; i++) {
+            firstReversedLetters.push(letters[i])
+        }
+
+        firstReversedLetters.reverse()
+
+        let index = 0
+        let sum = parenthesesIndex[0]
+
+        
+        for (let i = parenthesesIndex[0]; i <= parenthesesIndex[1]; i++) {
+
+            letters.splice(sum, 1, firstReversedLetters[index])
+            index = index + 1
+            sum = sum + 1
+
+        }
+        return letters.filter(l => l != '(' && l != ')').join('')
+        
+    }
+
+    console.log(parenthesesIndex, letters,firstReversedLetters);
 
 }
 
 
 console.log(
-    decode('MEN(VID)IL')
+    decode('hola (odnum)')
 )
