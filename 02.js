@@ -44,7 +44,6 @@ function manufacture(gifts, materials) {
 
         for (let index = 0; index < element.length; index++) {
            
-
             if (everyMaterial.find(e => e === element[index])) {
                 manufacturedGiftLength += 1
                 everyMaterial = everyMaterial.filter(e => e != element[index])
@@ -56,11 +55,9 @@ function manufacture(gifts, materials) {
         }
     }
 
-    
     return manufacturedGifts
 }
 console.log(
-
     manufacture(gifts, materials),
     manufacture(['juego', 'puzzle'], 'jlepuz'),
     manufacture(['libro', 'ps5'], 'psli'),
