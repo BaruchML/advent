@@ -47,25 +47,42 @@ function createFrame(names){
     let frameBorder = []
 
 
-    // High name
+    // Large name
     for (const name of names) {
         namesLength.push(name.length)
     }
     const lengthLargeName = Math.max(...namesLength)
-    const indexLargeName = namesLength.indexOf(lengthLargeName)
+    // const indexLargeName = namesLength.indexOf(lengthLargeName)
     
 
     //Border Lenght
-    for (let i = -1; i < lengthLargeName+1; i++) {
+    for (let i = -2; i < lengthLargeName+2; i++) {
         frameBorder.push('*')
-        
     }
-
-
-    return frameBorder.join('')
+    for (const name of names) {
+            let spaces = ['*', ' ', ' ', '*']
+            for (let i = 0; i < lengthLargeName; i++) {
+                spaces.splice(1, 0, ' ')
     
+            }
+            let indexSpace = 2
+            for (const element of name) {
+                spaces.splice(indexSpace,1,element)
+                indexSpace = indexSpace + 1
+            
+            }
+            frame.push(spaces)
+        }
+    frame.unshift(frameBorder)
+     frame.push(frameBorder)
+
+
+     
+    return frame.map(el => el.join('')).join('\n')
+
+
 }
 console.log(
-    createFrame(['midu', 'madeval', 'educalvolpz']) 
+    createFrame(['a', 'bb', 'ccc']) 
     
 );
